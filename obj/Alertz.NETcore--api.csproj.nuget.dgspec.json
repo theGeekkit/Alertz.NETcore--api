@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\sonof\\OneDrive\\Documents\\Github\\c#\\Alertz.NETcore--api\\Alertz.NETcore--api.csproj": {}
+    "C:\\Users\\sonof\\OneDrive\\Documents\\Github\\c#\\Alertz.NETcore--api\\Alertz.NETcore--api.csproj": {}
   },
   "projects": {
-    "c:\\Users\\sonof\\OneDrive\\Documents\\Github\\c#\\Alertz.NETcore--api\\Alertz.NETcore--api.csproj": {
+    "C:\\Users\\sonof\\OneDrive\\Documents\\Github\\c#\\Alertz.NETcore--api\\Alertz.NETcore--api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\sonof\\OneDrive\\Documents\\Github\\c#\\Alertz.NETcore--api\\Alertz.NETcore--api.csproj",
+        "projectUniqueName": "C:\\Users\\sonof\\OneDrive\\Documents\\Github\\c#\\Alertz.NETcore--api\\Alertz.NETcore--api.csproj",
         "projectName": "Alertz.NETcore--api",
-        "projectPath": "c:\\Users\\sonof\\OneDrive\\Documents\\Github\\c#\\Alertz.NETcore--api\\Alertz.NETcore--api.csproj",
+        "projectPath": "C:\\Users\\sonof\\OneDrive\\Documents\\Github\\c#\\Alertz.NETcore--api\\Alertz.NETcore--api.csproj",
         "packagesPath": "C:\\Users\\sonof\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\sonof\\OneDrive\\Documents\\Github\\c#\\Alertz.NETcore--api\\obj\\",
+        "outputPath": "C:\\Users\\sonof\\OneDrive\\Documents\\Github\\c#\\Alertz.NETcore--api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
