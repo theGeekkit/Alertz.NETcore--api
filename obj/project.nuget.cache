@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "i7ZLcqd+Z+v/c3UWFPGq8+dLZjV/E7lBg/i32xt62sO4J0BcovFiLnkewqT/DJ2oOTchcjiFuxKPsvuYdvsKvw==",
+  "dgSpecHash": "UokrQfVkAeGJSkfMeQjXHkgBi/hFjkFvHQpB5+RbXBJ9/gpfqNlYHtKi8nMD4JLmITBI5X6Jl/s0YBR0nWmSqA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\sonof\\OneDrive\\Documents\\Github\\c#\\Alertz.NETcore--api\\Alertz.NETcore--api.csproj",
+  "projectFilePath": "c:\\Users\\sonof\\OneDrive\\Documents\\Github\\c#\\Alertz.NETcore--api\\Alertz.NETcore--api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sonof\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\sonof\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
