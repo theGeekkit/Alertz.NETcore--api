@@ -29,39 +29,55 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = "swagger";
 });
 
-app.MapPost("/api/weather/weatheralerts", async context =>
+// Define the API endpoint for fetching weather alerts using HTTP GET
+app.MapGet("/api/weather/weatheralerts", async (double? latitude, double? longitude) =>
 {
-    WeatherData? data = await context.Request.ReadFromJsonAsync<WeatherData>();
-    if (data is not null)
+    if (latitude == null || longitude == null)
     {
-        double latitude = data.Latitude ?? 0.0;
-        double longitude = data.Longitude ?? 0.0;
+        return Results.BadRequest("Latitude and longitude must be provided.");
+    }
 
-        string apiUrl = $"https://api.weather.gov/alerts?point={latitude},{longitude}";
+    string pointsUrl = $"https://api.weather.gov/points/{latitude},{longitude}";
 
-        using HttpClient httpClient = context.RequestServices.GetRequiredService<IHttpClientFactory>().CreateClient();
-HttpResponseMessage? response = await httpClient.GetAsync(apiUrl);
-if (response is not null && response.IsSuccessStatusCode)
-{
-    WeatherAlerts? weatherAlerts = await response.Content.ReadFromJsonAsync<WeatherAlerts>();
-    if (weatherAlerts is not null)
+    using HttpClient httpClient = app.Services.GetRequiredService<IHttpClientFactory>().CreateClient();
+    HttpResponseMessage pointsResponse = await httpClient.GetAsync(pointsUrl);
+
+    if (pointsResponse.IsSuccessStatusCode)
     {
-        await context.Response.WriteAsJsonAsync(weatherAlerts);
+        // Read the points response to get the forecastGridData link
+        var pointsData = await pointsResponse.Content.ReadFromJsonAsync<PointsData>();
+        if (pointsData != null)
+        {
+            string gridpointUrl = pointsData.properties.forecastGridData;
+
+            HttpResponseMessage gridpointResponse = await httpClient.GetAsync(gridpointUrl);
+
+            if (gridpointResponse.IsSuccessStatusCode)
+            {
+                // Read the gridpoint response to get weather alerts
+                WeatherAlerts? weatherAlerts = await gridpointResponse.Content.ReadFromJsonAsync<WeatherAlerts>();
+                if (weatherAlerts != null)
+                {
+                    return Results.Ok(weatherAlerts);
+                }
+                else
+                {
+                    return Results.BadRequest("Error while fetching weather alerts.");
+                }
+            }
+            else
+            {
+                return Results.BadRequest("Error while fetching weather alerts gridpoint data.");
+            }
+        }
+        else
+        {
+            return Results.BadRequest("Error while fetching weather alerts metadata.");
+        }
     }
     else
     {
-        // Handle the case when the JSON deserialization fails or the data is null
-        // For example, return a bad request response
-        context.Response.StatusCode = 400;
-        await context.Response.WriteAsync("Error while fetching weather alerts.");
-    }
-}
-else
-{
-    // Handle the case when the HTTP request fails
-    context.Response.StatusCode = 400;
-    await context.Response.WriteAsync("Error while fetching weather alerts.");
-}
+        return Results.BadRequest("Error while fetching weather alerts points data.");
     }
 });
 
@@ -71,6 +87,16 @@ public class WeatherData
 {
     public double? Latitude { get; set; }
     public double? Longitude { get; set; }
+}
+
+public class PointsData
+{
+    public PointProperties properties { get; set; }
+}
+
+public class PointProperties
+{
+    public string forecastGridData { get; set; }
 }
 
 public class WeatherAlerts
